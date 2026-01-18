@@ -1,27 +1,26 @@
 from locators import MainPageLocators
 from urls import URLS
-from expected_texts import BUN_TEXT, SAUCES_TEXT, TOPPINGS_TEXT
 
 class TestConstructorPage:
 
     def test_transition_to_bun_success(self, driver):
         driver.get(URLS.MAIN_PAGE_URL)
-        driver.find_element(*MainPageLocators.sauces_btn).click()
-        driver.find_element(*MainPageLocators.bun_btn).click()
-        bun_text = driver.find_element(*MainPageLocators.bun).text
-        bun_displayed = driver.find_element(*MainPageLocators.bun_ul).is_displayed()
-        assert bun_text == BUN_TEXT and bun_displayed
+        driver.find_element(*MainPageLocators.sauces_btn).click() # Кликаем на "Соусы" для сброса состояния
+        driver.find_element(*MainPageLocators.bun_btn).click() # Кликаем на "Булки"
+
+        bun_tab_class = driver.find_element(*MainPageLocators.bun_btn).get_attribute("class") # Получаем значение атрибута class у таба "Булки"
+        assert "tab_tab_type_current" in bun_tab_class # Проверяем, что класс содержит "tab_tab_type_current", обозначающий активный таб
 
     def test_transition_to_sauces_success(self, driver):
         driver.get(URLS.MAIN_PAGE_URL)
-        driver.find_element(*MainPageLocators.sauces_btn).click()
-        sauces = driver.find_element(*MainPageLocators.sauces).text
-        sauces_displayed = driver.find_element(*MainPageLocators.sauces_ul).is_displayed()
-        assert sauces == SAUCES_TEXT and sauces_displayed
+        driver.find_element(*MainPageLocators.sauces_btn).click() # Кликаем на "Соусы"
+
+        sauces_tab_class = driver.find_element(*MainPageLocators.sauces_btn).get_attribute("class") # Получаем значение атрибута class у таба "Соусы"
+        assert "tab_tab_type_current" in sauces_tab_class # Проверяем, что класс содержит "tab_tab_type_current", обозначающий активный таб
 
     def test_transition_to_topping_success(self, driver):
         driver.get(URLS.MAIN_PAGE_URL)
-        driver.find_element(*MainPageLocators.toppings_btn).click()
-        topping = driver.find_element(*MainPageLocators.topping).text
-        topping_displayed = driver.find_element(*MainPageLocators.topping_ul).is_displayed()
-        assert topping == TOPPINGS_TEXT and topping_displayed
+        driver.find_element(*MainPageLocators.toppings_btn).click() # Кликаем на "Начинки"
+
+        topping_tab_class = driver.find_element(*MainPageLocators.toppings_btn).get_attribute("class") # Получаем значение атрибута class у таба "Начинки"
+        assert "tab_tab_type_current" in topping_tab_class # Проверяем, что класс содержит "tab_tab_type_current", обозначающий активный таб
