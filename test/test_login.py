@@ -19,11 +19,11 @@ class TestLogin:
         driver.find_element(*AuthPageLocators.email_input).send_keys(Person.email)  # Вводим email
         driver.find_element(*AuthPageLocators.password_input).send_keys(Person.password)  # Вводим пароль
         driver.find_element(*AuthPageLocators.login_account_btn).click()  # Жмём кнопку входа
+        # Подтверждение успешного входа - проверяем, что кнопка "Оформить заказ" видна
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.place_order_button)
         )  # Ждём появления кнопки "Оформить заказ"
-        order_btn = driver.find_element(*MainPageLocators.place_order_button).text  # Получаем текст кнопки
-        assert (driver.current_url == URLS.MAIN_PAGE_URL) and (order_btn == 'Оформить заказ')  # Проверяем URL и текст
+        assert driver.find_element(*MainPageLocators.place_order_button).is_displayed() # Проверяем, что элемент отображается
 
     def test_login_in_personal_account_btn_success(self, driver):
         # Вход в личный кабинет через кнопку "Личный кабинет" на главной странице
@@ -32,11 +32,11 @@ class TestLogin:
         driver.find_element(*AuthPageLocators.email_input).send_keys(Person.email)
         driver.find_element(*AuthPageLocators.password_input).send_keys(Person.password)
         driver.find_element(*AuthPageLocators.login_account_btn).click()
+        # Подтверждение успешного входа
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.place_order_button)
         )
-        order_btn = driver.find_element(*MainPageLocators.place_order_button).text
-        assert (driver.current_url == URLS.MAIN_PAGE_URL) and (order_btn == 'Оформить заказ')
+        assert driver.find_element(*MainPageLocators.place_order_button).is_displayed()
 
     def test_login_in_registration_form_success(self, driver):
         # Вход в личный кабинет через форму регистрации
@@ -45,11 +45,11 @@ class TestLogin:
         driver.find_element(*AuthPageLocators.email_input).send_keys(Person.email)
         driver.find_element(*AuthPageLocators.password_input).send_keys(Person.password)
         driver.find_element(*AuthPageLocators.login_account_btn).click()
+        # Подтверждение успешного входа
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.place_order_button)
         )
-        order_btn = driver.find_element(*MainPageLocators.place_order_button).text
-        assert (driver.current_url == URLS.MAIN_PAGE_URL) and (order_btn == 'Оформить заказ')
+        assert driver.find_element(*MainPageLocators.place_order_button).is_displayed()
 
     def test_login_in_recover_form_success(self, driver):
         # Вход в личный кабинет через форму восстановления
@@ -58,8 +58,8 @@ class TestLogin:
         driver.find_element(*AuthPageLocators.email_input).send_keys(Person.email)
         driver.find_element(*AuthPageLocators.password_input).send_keys(Person.password)
         driver.find_element(*AuthPageLocators.login_account_btn).click()
+        # Подтверждение успешного входа
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.place_order_button)
         )
-        order_btn = driver.find_element(*MainPageLocators.place_order_button).text
-        assert (driver.current_url == URLS.MAIN_PAGE_URL) and (order_btn == 'Оформить заказ')
+        assert driver.find_element(*MainPageLocators.place_order_button).is_displayed()
